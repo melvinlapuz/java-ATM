@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        
+        String inputPassword;
+        String inputUsername;
+        String username = "user123";
+        String password = "pass123";
+        int att = 3; 
+        double balance = 1000;
+        char anotherTransac;
+         
+        do{
+        System.out.print("Enter your username: ");
+        inputUsername = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        inputPassword = scanner.nextLine();
+        
+        if (inputUsername.equals(username) && inputPassword.equals(password)){
+            System.out.println("");
+            System.out.println("My Bank Atm v1.0");
+            System.out.println("#1 Deposit");
+            System.out.println("#2 Withdraw");
+            System.out.println("#3 Check Balance");
+            System.out.println("#4 Exit");
+            
+            do{
+                
+                System.out.print("\nSelect your option: ");
+                int menuOption = scanner.nextInt();
+            
+                switch(menuOption){
+                case 1: 
+                    System.out.print("How much you want to Deposit?: ");
+                    double depositAmount = scanner.nextDouble();
+                    balance += depositAmount;
+                    System.out.println("Deposit Successfully P" + balance);
+                    break;
+                case 2: 
+                    System.out.print("How much you want to Withdraw?: ");
+                    double withdrawAmount = scanner.nextDouble();
+                    if (withdrawAmount > balance){
+                        System.out.println("Insuficient Balance! Try Again");
+                    }else{
+                        balance -= withdrawAmount;
+                        System.out.println("Withdraw Successfully: P" + balance);
+                    }
+                    break;
+                case 3:
+                    System.out.println("Your Balance is : P" + balance);
+                    break;
+                case 4:
+                    System.out.println("Thank you for using our Atm");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid Selection");
+                    break;
+            }
+            
+                System.out.print("\nDo you want another transaction?[Y/N]: ");
+                anotherTransac = scanner.next().charAt(0);
+                
+            }while(anotherTransac == 'y' || anotherTransac == 'Y');
+            
+            System.out.println("Thank you for using our Atm");
+            
+        }else{
+            att -= 1;
+            System.out.println("Invalid Username or Password!");
+            System.out.println("Your Remaining Attemp: " + att);
+            System.out.println("============================");
+        }
+         if (att == 0){
+            System.out.println("!Your account is lock due to failed attemps!");
+            System.exit(0);
+        }
+        
+        }while(!inputUsername.equals(username) && !inputPassword.equals(password));
+        
+       
+    }
+}
